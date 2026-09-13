@@ -2476,7 +2476,25 @@ function displayCard(
     return;
   }
 
+  const fanContainer =
+    document.getElementById(
+      "fanContainer"
+    );
 
+  const selectedStage =
+    document.getElementById(
+      "selectedCardStage"
+    );
+
+  if (fanContainer) {
+    fanContainer.style.display =
+      "none";
+  }
+
+  if (selectedStage) {
+    selectedStage.style.display =
+      "flex";
+  }
   const cardElement =
     document.getElementById("empowermentCard");
 
