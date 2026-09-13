@@ -1,1 +1,2051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<title>Your Daily Empowerment Card</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+  --blue: #6F92A5;
+  --blue-light: #A9C2CF;
+  --blue-dark: #526F7E;
+
+  --cream: #F8F3EF;
+  --white: #ffffff;
+
+  --text: #40525C;
+  --text-light: #687982;
+  --muted: #87959B;
+
+  --border: #D9E1E4;
+  --blue-pale: rgba(169,194,207,0.18);
+  --blue-border: rgba(111,146,165,0.30);
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  line-height: 1.7;
+}
+
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* =========================
+   PAGE SYSTEM
+========================= */
+
+.page {
+  display: none;
+  min-height: 100vh;
+}
+
+.page.active {
+  display: block;
+}
+
+
+/* =========================
+   WELCOME PAGE
+========================= */
+
+#welcomePage {
+  min-height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #526F7E 0%,
+      #6F92A5 48%,
+      #A9C2CF 100%
+    );
+
+  padding: 50px 20px;
+}
+
+#welcomePage.active {
+  display: flex;
+}
+
+.welcome-inner {
+  width: 100%;
+  max-width: 760px;
+  text-align: center;
+  color: var(--white);
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  opacity: 0.9;
+}
+
+.welcome-title {
+  margin: 0 auto 18px;
+
+  max-width: 720px;
+
+  font-family: "Playfair Display", serif;
+  font-size: clamp(42px, 7vw, 68px);
+  line-height: 1.05;
+  font-weight: 500;
+}
+
+.welcome-subtitle {
+  margin: 0 auto 22px;
+
+  max-width: 650px;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.25;
+  font-style: italic;
+}
+
+.welcome-copy {
+  max-width: 620px;
+  margin: 0 auto 34px;
+
+  font-size: 16px;
+  line-height: 1.8;
+
+  opacity: 0.94;
+}
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 52px;
+  padding: 13px 28px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: var(--white);
+  color: var(--blue-dark);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.bookmark-note {
+  margin: 18px auto 0;
+
+  max-width: 500px;
+
+  font-size: 12px;
+  line-height: 1.6;
+
+  opacity: 0.82;
+}
+
+.bookmark-note strong {
+  display: block;
+  margin-bottom: 3px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   WAITLIST CARD
+========================= */
+
+.waitlist-card {
+  max-width: 620px;
+  margin: 42px auto 0;
+
+  padding: 25px 28px;
+
+  background: rgba(255,255,255,0.12);
+
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 18px;
+
+  backdrop-filter: blur(8px);
+}
+
+.waitlist-label {
+  margin-bottom: 5px;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.waitlist-card h3 {
+  margin: 0 0 7px;
+
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.waitlist-card p {
+  margin: 0 0 16px;
+
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 11px 21px;
+
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 999px;
+
+  background: transparent;
+  color: var(--white);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.secondary-button:hover {
+  background: var(--white);
+  color: var(--blue-dark);
+}
+
+
+/* =========================
+   CARD PAGE
+========================= */
+
+#cardPage {
+  background: var(--cream);
+}
+
+.card-hero {
+  min-height: 820px;
+
+  padding: 70px 20px 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 25%,
+      rgba(169,194,207,0.55),
+      transparent 42%
+    ),
+    var(--cream);
+}
+
+.card-generator {
+  width: 100%;
+  max-width: 760px;
+
+  text-align: center;
+}
+
+.card-eyebrow {
+  color: var(--blue);
+
+  margin-bottom: 14px;
+}
+
+.card-title {
+  margin: 0 auto 15px;
+
+  font-family: "Playfair Display", serif;
+  font-size: clamp(34px, 6vw, 52px);
+  line-height: 1.15;
+  font-weight: 500;
+
+  color: var(--text);
+}
+
+.card-intro {
+  max-width: 600px;
+  margin: 0 auto 35px;
+
+  font-size: 15px;
+  line-height: 1.75;
+
+  color: var(--text-light);
+}
+
+
+/* =========================
+   ORACLE CARD
+========================= */
+
+.card-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10px auto 30px;
+
+  perspective: 1200px;
+}
+
+.empowerment-card {
+  position: relative;
+
+  width: min(330px, 78vw);
+  aspect-ratio: 2 / 3;
+
+  transform-style: preserve-3d;
+
+  transition:
+    transform 0.9s cubic-bezier(.2,.75,.25,1);
+
+  cursor: default;
+}
+
+.empowerment-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  box-shadow:
+    0 18px 45px rgba(64,82,92,0.18);
+}
+
+.card-face img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.card-back {
+  transform: rotateY(0deg);
+}
+
+.card-front {
+  transform: rotateY(180deg);
+}
+
+
+/* =========================
+   CARD TITLE
+========================= */
+
+.card-result {
+  min-height: 42px;
+
+  margin: 0 auto 22px;
+
+  opacity: 0;
+  transform: translateY(8px);
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.card-result.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-result-title {
+  margin: 0;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 28px;
+  line-height: 1.25;
+
+  color: var(--blue-dark);
+}
+
+
+/* =========================
+   CARD BUTTON
+========================= */
+
+.card-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 52px;
+  padding: 13px 30px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: var(--blue);
+  color: var(--white);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 22px rgba(111,146,165,0.22);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card-button:hover:not(:disabled) {
+  background: var(--blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(111,146,165,0.28);
+}
+
+.card-button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.card-status {
+  margin: 14px auto 0;
+
+  font-size: 12px;
+  line-height: 1.6;
+
+  color: var(--muted);
+}
+
+
+/* =========================
+   INTERPRETATION SECTION
+========================= */
+
+.interpretation-section {
+  padding: 75px 20px;
+
+  background: var(--white);
+}
+
+.content-narrow {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  margin-bottom: 12px;
+
+  color: var(--blue);
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  margin: 0 0 18px;
+
+  font-family: "Playfair Display", serif;
+  font-size: clamp(30px, 5vw, 42px);
+  line-height: 1.2;
+  font-weight: 500;
+
+  color: var(--text);
+}
+
+.section-copy {
+  margin: 0;
+
+  font-size: 15px;
+  line-height: 1.85;
+
+  color: var(--text-light);
+}
+
+
+/* =========================
+   CARD USE CTA
+========================= */
+
+.card-use-section {
+  padding: 70px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(169,194,207,0.24),
+      rgba(248,243,239,1)
+    );
+}
+
+.use-grid {
+  max-width: 900px;
+  margin: 35px auto 0;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 15px;
+}
+
+.use-box {
+  padding: 23px 18px;
+
+  background: rgba(255,255,255,0.72);
+
+  border: 1px solid var(--blue-border);
+  border-radius: 16px;
+
+  text-align: center;
+}
+
+.use-box h3 {
+  margin: 0 0 8px;
+
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 500;
+
+  color: var(--blue-dark);
+}
+
+.use-box p {
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.65;
+
+  color: var(--text-light);
+}
+
+
+/* =========================
+   APP SECTION
+========================= */
+
+.app-section {
+  padding: 70px 20px;
+}
+
+.app-card {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  padding: 55px 50px;
+
+  background: var(--blue-dark);
+  color: var(--white);
+
+  border-radius: 24px;
+
+  text-align: center;
+}
+
+.app-card .section-eyebrow {
+  color: var(--blue-light);
+}
+
+.app-card .section-title {
+  color: var(--white);
+}
+
+.app-card p {
+  max-width: 720px;
+  margin: 0 auto 26px;
+
+  font-size: 15px;
+  line-height: 1.8;
+
+  opacity: 0.9;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-section {
+  padding: 80px 20px;
+
+  background: var(--white);
+}
+
+.about-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+
+  gap: 55px;
+
+  align-items: center;
+}
+
+.about-image {
+  width: 100%;
+
+  aspect-ratio: 4 / 5;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  background: var(--blue-pale);
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.about-text p {
+  margin: 0 0 18px;
+
+  font-size: 14px;
+  line-height: 1.8;
+
+  color: var(--text-light);
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================
+   FINAL CTA
+========================= */
+
+.final-section {
+  padding: 85px 20px 70px;
+
+  text-align: center;
+}
+
+.final-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.final-title {
+  margin: 0 auto 17px;
+
+  font-family: "Playfair Display", serif;
+  font-size: clamp(34px, 5vw, 48px);
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+.final-copy {
+  max-width: 650px;
+  margin: 0 auto 40px;
+
+  color: var(--text-light);
+
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+
+/* =========================
+   FEATURE BOXES
+========================= */
+
+.feature-grid {
+  max-width: 1000px;
+  margin: 0 auto 42px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.feature-box {
+  overflow: hidden;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  text-align: left;
+
+  box-shadow: 0 7px 25px rgba(64,82,92,0.05);
+}
+
+.feature-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue-light),
+      var(--blue)
+    );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--white);
+
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.feature-content {
+  padding: 22px;
+}
+
+.feature-box h3 {
+  margin: 0 0 8px;
+
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  font-weight: 500;
+
+  color: var(--text);
+}
+
+.feature-box p {
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.7;
+
+  color: var(--text-light);
+}
+
+.final-small {
+  margin-top: 18px;
+
+  font-size: 12px;
+  color: var(--muted);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  padding: 35px 20px;
+
+  text-align: center;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--muted);
+
+  font-size: 11px;
+}
+
+footer a {
+  color: var(--blue-dark);
+  text-decoration: none;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 760px) {
+
+  .welcome-title {
+    font-size: 43px;
+  }
+
+  .welcome-subtitle {
+    font-size: 25px;
+  }
+
+  .welcome-copy {
+    font-size: 14px;
+  }
+
+  .card-hero {
+    min-height: auto;
+    padding-top: 55px;
+    padding-bottom: 65px;
+  }
+
+  .card-intro {
+    font-size: 14px;
+  }
+
+  .empowerment-card {
+    width: min(300px, 76vw);
+  }
+
+  .use-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .app-card {
+    padding: 42px 25px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .about-image {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .use-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-title {
+    font-size: 34px;
+  }
+
+}
+
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .empowerment-card,
+  .card-result,
+  .primary-button,
+  .card-button {
+    transition: none;
+  }
+
+}
+
+
+/* =========================
+   PLACEHOLDER FEATURE IMAGE
+========================= */
+
+.placeholder-label {
+  text-align: center;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     PAGE 1 — WELCOME
+========================================================= -->
+
+<section id="welcomePage" class="page active">
+
+  <div class="welcome-inner">
+
+    <p class="eyebrow">
+      A little guidance for your day
+    </p>
+
+    <h1 class="welcome-title">
+      Your Daily Empowerment Card
+    </h1>
+
+    <p class="welcome-subtitle">
+      Pull a card. Notice what speaks to you.
+    </p>
+
+    <p class="welcome-copy">
+      Sometimes we don't need another answer. We simply need a moment
+      to pause, look at something from a different perspective, and
+      notice what resonates.
+      <br><br>
+      This free card pull gives you access to 33 cards from the
+      empowerment deck inside my upcoming app. Pull one card each day
+      and use whatever you notice as a starting point for reflection,
+      intention, or simply a little inspiration.
+    </p>
+
+    <button
+      class="primary-button"
+      onclick="openCardPage()">
+      Pull my daily card
+    </button>
+
+    <div class="bookmark-note">
+      <strong>Bookmark this page</strong>
+      Come back tomorrow for your next daily empowerment card.
+    </div>
+
+
+    <div class="waitlist-card">
+
+      <div class="waitlist-label">
+        FOUNDING MEMBERSHIP
+      </div>
+
+      <h3>
+        Be part of what's coming
+      </h3>
+
+      <p>
+        Join the waitlist for my new holistic wellbeing app and
+        get access to a special founding member offer when we launch.
+      </p>
+
+      <a
+        class="secondary-button"
+        href="https://meroyoga.thrivecart.com/new-app-resource/?coupon=WAITLIST"
+        target="_blank"
+        rel="noopener">
+        Join the waitlist
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PAGE 2 — CARD EXPERIENCE
+========================================================= -->
+
+<section id="cardPage" class="page">
+
+  <!-- CARD PULL -->
+
+  <section class="card-hero">
+
+    <div class="card-generator">
+
+      <p class="eyebrow card-eyebrow">
+        YOUR DAILY CARD
+      </p>
+
+      <h1 class="card-title">
+        What are you being invited to notice today?
+      </h1>
+
+      <p class="card-intro">
+        You don't need to know what you're looking for.
+        Simply pull a card, take a moment with what you see,
+        and notice what catches your attention.
+      </p>
+
+
+      <!-- CARD -->
+
+      <div class="card-stage">
+
+        <div
+          id="empowermentCard"
+          class="empowerment-card">
+
+          <!-- CARD BACK -->
+
+          <div class="card-face card-back">
+
+            <img
+              src="https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/CARD-BACKSIDE.png"
+              alt="Back of the empowerment card">
+
+          </div>
+
+
+          <!-- CARD FRONT -->
+
+          <div class="card-face card-front">
+
+            <img
+              id="cardImage"
+              src=""
+              alt="Your daily empowerment card">
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CARD TITLE -->
+
+      <div
+        id="cardResult"
+        class="card-result"
+        aria-live="polite">
+
+        <p
+          id="cardResultTitle"
+          class="card-result-title">
+        </p>
+
+      </div>
+
+
+      <!-- BUTTON -->
+
+      <button
+        id="pullCardButton"
+        class="card-button"
+        onclick="pullDailyCard()">
+
+        Pull my card
+
+      </button>
+
+
+      <div
+        id="cardStatus"
+        class="card-status"
+        aria-live="polite">
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =======================================================
+       INTERPRETATION
+  ======================================================== -->
+
+  <section class="interpretation-section">
+
+    <div class="content-narrow">
+
+      <p class="section-eyebrow">
+        Make it your own
+      </p>
+
+      <h2 class="section-title">
+        There is no right way to interpret your card.
+      </h2>
+
+      <p class="section-copy">
+        Rather than giving you a predetermined definition of what your
+        card means, I invite you to explore it for yourself.
+        <br><br>
+        Look at the visual. Read the words. Notice what immediately
+        catches your attention, what creates a reaction, or what feels
+        unexpectedly relevant to where you are right now.
+        <br><br>
+        Your interpretation may be completely different from someone
+        else's — and that's exactly what makes the experience personal.
+        Every now and then, the meaning that emerges when you give
+        yourself space to notice can be more useful than an answer
+        someone else has given you.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =======================================================
+       HOW TO USE YOUR CARD
+  ======================================================== -->
+
+  <section class="card-use-section">
+
+    <div class="content-narrow">
+
+      <p class="section-eyebrow">
+        Take it a little further
+      </p>
+
+      <h2 class="section-title">
+        Let your card become the starting point.
+      </h2>
+
+      <p class="section-copy">
+        You don't have to do anything with your card. But if something
+        about it speaks to you, let it become a foundation for whatever
+        you need today.
+      </p>
+
+    </div>
+
+
+    <div class="use-grid">
+
+      <div class="use-box">
+
+        <h3>
+          Intention
+        </h3>
+
+        <p>
+          Use your card as a theme or focus for the day ahead.
+        </p>
+
+      </div>
+
+
+      <div class="use-box">
+
+        <h3>
+          Meditation
+        </h3>
+
+        <p>
+          Sit with the image or words and notice what arises.
+        </p>
+
+      </div>
+
+
+      <div class="use-box">
+
+        <h3>
+          Tapping
+        </h3>
+
+        <p>
+          Use your card as a starting point for an EFT tapping session.
+        </p>
+
+      </div>
+
+
+      <div class="use-box">
+
+        <h3>
+          Journaling
+        </h3>
+
+        <p>
+          Let the card open up a question, thought, or reflection.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =======================================================
+       APP SECTION
+  ======================================================== -->
+
+  <section class="app-section">
+
+    <div class="app-card">
+
+      <p class="section-eyebrow">
+        Get so much more in the app
+      </p>
+
+      <h2 class="section-title">
+        Your support, your way.
+      </h2>
+
+      <p>
+        This daily card pull is just one small glimpse of what's
+        coming inside my new holistic wellbeing app.
+        <br><br>
+        The app will give you access to five different card decks
+        to choose from — four permanent decks plus a monthly themed
+        deck that changes throughout the year.
+        <br><br>
+        So whether you're looking for empowerment, reflection,
+        motivation, guidance, or simply something to focus on,
+        you can choose the kind of support that feels right for you.
+      </p>
+
+      <a
+        class="primary-button"
+        href="https://meroyoga.thrivecart.com/new-app-resource/?coupon=WAITLIST"
+        target="_blank"
+        rel="noopener">
+        Join the waitlist
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =======================================================
+       WHO I AM
+  ======================================================== -->
+
+  <section class="about-section">
+
+    <div class="about-grid">
+
+      <div class="about-image">
+
+        <!-- Existing image retained -->
+
+        <img
+          src="https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/Mette%20Rosenqvist%20Meroyoga.jpg"
+          alt="Mette Rosenqvist">
+
+      </div>
+
+
+      <div class="about-text">
+
+        <p class="section-eyebrow">
+          Who am I
+        </p>
+
+        <h2 class="section-title">
+          A little about me
+        </h2>
+
+        <p>
+          I'm Mette, a mindset mentor, yoga teacher, and energy/sound
+          healer. I bring a rare blend of corporate experience,
+          holistic healing, and deep intuition to the table, and meet
+          you exactly where you are, without judgment or BS.
+        </p>
+
+        <p>
+          By blending mindset mentoring, nervous-system regulation,
+          and holistic energy work, I help women through deep personal
+          transformation by building the mindset, self-awareness,
+          and resilience they need to feel calm, clear, and back in control.
+        </p>
+
+        <p>
+          I created this empowerment card resource because I believe
+          personal growth doesn't always have to begin with a big
+          question or a complicated process. Sometimes a simple image,
+          a few words, or a different perspective can create the space
+          for something meaningful to emerge.
+        </p>
+
+        <p>
+          This little card pull is inspired by my new app under
+          development, where I'm consolidating my years of experience,
+          skills, and knowledge in coaching women to create a powerful
+          toolbox of resources based on 4 core principles:
+          Support, guidance, choice, and agency.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =======================================================
+       FINAL SECTION
+  ======================================================== -->
+
+  <section class="final-section">
+
+    <div class="final-inner">
+
+      <p class="section-eyebrow">
+        Stay connected
+      </p>
+
+      <h2 class="final-title">
+        There's much more to come.
+      </h2>
+
+      <p class="final-copy">
+        The empowerment cards are just one part of the wider toolbox
+        I'm creating inside the app. Everything is designed to give
+        you practical ways to support yourself — with the freedom
+        to choose what feels useful in the moment.
+      </p>
+
+
+      <!-- FEATURE BOXES -->
+
+      <div class="feature-grid">
+
+
+        <!-- FEATURE 1 -->
+
+        <div class="feature-box">
+
+          <div class="feature-image">
+
+            <!-- PLACEHOLDER IMAGE
+                 Replace this entire div with an <img> later -->
+
+            <span class="placeholder-label">
+              Deck image placeholder
+            </span>
+
+          </div>
+
+          <div class="feature-content">
+
+            <h3>
+              Practice Guides
+            </h3>
+
+            <p>
+              Placeholder text for the image and short description
+              introducing the practice guides available in the app.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- FEATURE 2 -->
+
+        <div class="feature-box">
+
+          <div class="feature-image">
+
+            <!-- PLACEHOLDER IMAGE -->
+
+            <span class="placeholder-label">
+              Deck image placeholder
+            </span>
+
+          </div>
+
+          <div class="feature-content">
+
+            <h3>
+              Your app, your way
+            </h3>
+
+            <p>
+              Choose from five card decks, personalize your experience,
+              and explore the tools that feel right for you.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- FEATURE 3 -->
+
+        <div class="feature-box">
+
+          <div class="feature-image">
+
+            <!-- PLACEHOLDER IMAGE -->
+
+            <span class="placeholder-label">
+              Deck image placeholder
+            </span>
+
+          </div>
+
+          <div class="feature-content">
+
+            <h3>
+              Daily support for personal growth
+            </h3>
+
+            <p>
+              Placeholder text for another deck or app feature image
+              and a short description of how it supports everyday life.
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <a
+        class="card-button"
+        href="https://meroyoga.thrivecart.com/new-app-resource/?coupon=WAITLIST"
+        target="_blank"
+        rel="noopener">
+        Join the waitlist
+      </a>
+
+      <div class="final-small">
+        Get in a lifetime deal as a founding member.
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+    <div>
+      Meroyoga
+    </div>
+
+    <div>
+      <a
+        href="https://www.meroyoga.com"
+        target="_blank"
+        rel="noopener">
+        www.meroyoga.com
+      </a>
+    </div>
+
+    <div>
+      © 2026 Meroyoga
+    </div>
+
+  </footer>
+
+</section>
+
+
+
+<script>
+
+/* ============================================================
+   CARD DATA
+============================================================ */
+
+/*
+  Each card has:
+  - image = card image URL
+  - title = title shown underneath the card
+
+  No Supabase connection is used.
+*/
+
+const empowermentCards = [
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/01-The%20power%20of%20a%20choice.png",
+    title: "The Power of a Choice"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/02-Thank%20the%20people%20who%20support%20you%20.png",
+    title: "Thank the People Who Support You"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/03-Enjoy%20your%20own%20company.png",
+    title: "Enjoy Your Own Company"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/04-You%20can%20do%20hard%20things!.png",
+    title: "You Can Do Hard Things!"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/05-Create%20space%20for%20stillness.png",
+    title: "Create Space for Stillness"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/06-Commit%20to%20showing%20up.png",
+    title: "Commit to Showing Up"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/07-Release%20attachemtns.png",
+    title: "Release Attachments"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/08-Use%20your%20creativity.png",
+    title: "Use Your Creativity"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/09-Nuture%20your%20inner%20peace.png",
+    title: "Nurture Your Inner Peace"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/10-Protect%20yourself.png",
+    title: "Protect Yourself"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/11-Declutter%20your%20space.png",
+    title: "Declutter Your Space"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/12-Celebrate%20your%20wins.png",
+    title: "Celebrate Your Wins"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/13-Rely%20on%20your%20inner%20wisdom.png",
+    title: "Rely on Your Inner Wisdom"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/14-Allow%20support.png",
+    title: "Allow Support"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/15-Know%20where%20you%20are.png",
+    title: "Know Where You Are"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/16-Release%20what%20you%20can%20not%20control.png",
+    title: "Release What You Cannot Control"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/17-Permsision%20to%20speak%20up.png",
+    title: "Permission to Speak Up"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/18-Let%20rest%20be%20part%20of%20it.png",
+    title: "Let Rest Be Part of It"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/19-Permission%20to%20start%20now.png",
+    title: "Permission to Start Now"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/20-Show%20yourself%20patience.png",
+    title: "Show Yourself Patience"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/21-Let%20yourself%20be%20unique.png",
+    title: "Let Yourself Be Unique"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/22-Allow%20guidance%20into%20your%20life.png",
+    title: "Allow Guidance Into Your Life"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/23-Take%20time%20to%20rest.png",
+    title: "Take Time to Rest"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/24-Cultivate%20the%20right%20people.png",
+    title: "Cultivate the Right People"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/25-Maintain%20a%20beginner's%20mindset.png",
+    title: "Maintain a Beginner's Mindset"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/26-Take%20the%20first%20step.png",
+    title: "Take the First Step"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/27-Rise%20and%20see%20the%20big%20picture.png",
+    title: "Rise and See the Big Picture"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/28-It's%20your%20choice.png",
+    title: "It's Your Choice"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/29-Utilize%20all%20of%20your%20strengths.png",
+    title: "Utilize All of Your Strengths"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/30-Put%20ideas%20into%20motion.png",
+    title: "Put Ideas Into Motion"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/31-Let%20the%20cycle%20unfold.png",
+    title: "Let the Cycle Unfold"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/32-Choose%20what%20lights%20you%20up.png",
+    title: "Choose What Lights You Up"
+  },
+
+  {
+    image: "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/33-Forgive%20yourself.png",
+    title: "Forgive Yourself"
+  }
+
+];
+
+
+/* ============================================================
+   STORAGE
+============================================================ */
+
+const STORAGE_KEY = "daily_empowerment_card_v1";
+
+
+/* ============================================================
+   PAGE NAVIGATION
+============================================================ */
+
+function openCardPage() {
+
+  document.getElementById("welcomePage").classList.remove("active");
+
+  document.getElementById("cardPage").classList.add("active");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  initialiseDailyCard();
+}
+
+
+/* ============================================================
+   GET LOCAL DATE
+============================================================ */
+
+function getTodayKey() {
+
+  const now = new Date();
+
+  const year = now.getFullYear();
+
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+
+  const day = String(now.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+
+/* ============================================================
+   GET SAVED CARD
+============================================================ */
+
+function getSavedCard() {
+
+  try {
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (!saved) {
+      return null;
+    }
+
+    return JSON.parse(saved);
+
+  } catch (error) {
+
+    return null;
+
+  }
+
+}
+
+
+/* ============================================================
+   SAVE CARD
+============================================================ */
+
+function saveDailyCard(index) {
+
+  const data = {
+
+    date: getTodayKey(),
+
+    index: index
+
+  };
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
+
+}
+
+
+/* ============================================================
+   CHECK TODAY'S CARD
+============================================================ */
+
+function initialiseDailyCard() {
+
+  const saved = getSavedCard();
+
+  if (!saved) {
+    return;
+  }
+
+
+  const today = getTodayKey();
+
+
+  /*
+    If the saved card belongs to today,
+    show it immediately.
+  */
+
+  if (
+    saved.date === today &&
+    empowermentCards[saved.index]
+  ) {
+
+    displayCard(
+      saved.index,
+      false
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   PULL DAILY CARD
+============================================================ */
+
+function pullDailyCard() {
+
+  const button =
+    document.getElementById("pullCardButton");
+
+  const status =
+    document.getElementById("cardStatus");
+
+  const today =
+    getTodayKey();
+
+  const saved =
+    getSavedCard();
+
+
+  /*
+    IMPORTANT:
+    Check again every time the button is pressed.
+
+    This means that if someone leaves the page open
+    overnight, they can still receive a new card
+    after midnight.
+  */
+
+  if (
+    saved &&
+    saved.date === today &&
+    empowermentCards[saved.index]
+  ) {
+
+    displayCard(
+      saved.index,
+      false
+    );
+
+    return;
+  }
+
+
+  /*
+    Pick a random card.
+
+    Avoid yesterday's card when possible.
+  */
+
+  let randomIndex;
+
+  if (
+    saved &&
+    empowermentCards.length > 1
+  ) {
+
+    do {
+
+      randomIndex =
+        Math.floor(
+          Math.random() * empowermentCards.length
+        );
+
+    } while (
+      randomIndex === saved.index
+    );
+
+  } else {
+
+    randomIndex =
+      Math.floor(
+        Math.random() * empowermentCards.length
+      );
+
+  }
+
+
+  saveDailyCard(randomIndex);
+
+  displayCard(
+    randomIndex,
+    true
+  );
+
+}
+
+
+/* ============================================================
+   DISPLAY CARD
+============================================================ */
+
+function displayCard(
+  index,
+  animate
+) {
+
+  const card =
+    empowermentCards[index];
+
+  if (!card) {
+    return;
+  }
+
+
+  const cardElement =
+    document.getElementById("empowermentCard");
+
+  const cardImage =
+    document.getElementById("cardImage");
+
+  const cardTitle =
+    document.getElementById("cardResultTitle");
+
+  const cardResult =
+    document.getElementById("cardResult");
+
+  const button =
+    document.getElementById("pullCardButton");
+
+  const status =
+    document.getElementById("cardStatus");
+
+
+  cardImage.src = card.image;
+
+  cardImage.alt =
+    "Daily empowerment card: " + card.title;
+
+  cardTitle.textContent =
+    card.title;
+
+
+  if (animate) {
+
+    /*
+      Small delay gives the browser time
+      to register the image before flipping.
+    */
+
+    button.disabled = true;
+
+    status.textContent =
+      "Your card has been chosen for today.";
+
+    cardResult.classList.remove("visible");
+
+    setTimeout(() => {
+
+      cardElement.classList.add("flipped");
+
+      setTimeout(() => {
+
+        cardResult.classList.add("visible");
+
+        button.textContent =
+          "Your card for today";
+
+        button.disabled = true;
+
+        status.textContent =
+          "Come back tomorrow for a new card.";
+
+      }, 450);
+
+    }, 150);
+
+  } else {
+
+    /*
+      Existing daily card after page refresh.
+    */
+
+    cardElement.classList.add("flipped");
+
+    cardResult.classList.add("visible");
+
+    button.textContent =
+      "Your card for today";
+
+    button.disabled = true;
+
+    status.textContent =
+      "Come back tomorrow for a new card.";
+
+  }
+
+}
+
+
+/* ============================================================
+   SAFETY CHECK FOR MIDNIGHT
+============================================================ */
+
+/*
+  If the page remains open for a long time,
+  periodically check whether a new day has started.
+
+  We do NOT automatically pull a card.
+  We simply make the button available again.
+*/
+
+setInterval(() => {
+
+  const saved =
+    getSavedCard();
+
+  const button =
+    document.getElementById("pullCardButton");
+
+  if (!button) {
+    return;
+  }
+
+  const today =
+    getTodayKey();
+
+
+  if (
+    saved &&
+    saved.date !== today
+  ) {
+
+    button.disabled = false;
+
+    button.textContent =
+      "Pull my new daily card";
+
+    document
+      .getElementById("cardStatus")
+      .textContent =
+      "A new day has started. Your next card is waiting.";
+
+  }
+
+}, 60000);
+
+
+</script>
+
+</body>
+</html>
