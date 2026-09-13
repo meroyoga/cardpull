@@ -2291,6 +2291,103 @@ function createFan() {
 }
 
 /* ============================================================
+   SELECT CARD FROM FAN
+============================================================ */
+
+function selectFanCard(index) {
+
+  const fanContainer =
+    document.getElementById(
+      "fanContainer"
+    );
+
+  const selectedStage =
+    document.getElementById(
+      "selectedCardStage"
+    );
+
+  const button =
+    document.getElementById(
+      "pullCardButton"
+    );
+
+  const status =
+    document.getElementById(
+      "cardStatus"
+    );
+
+
+  /*
+    Prevent another selection
+    during the transition.
+  */
+
+  const fanCards =
+    document.querySelectorAll(
+      ".fan-card"
+    );
+
+  fanCards.forEach(
+    (fanCard) => {
+
+      fanCard.style.pointerEvents =
+        "none";
+
+      fanCard.style.opacity =
+        "0";
+
+      fanCard.style.transform +=
+        " translateY(35px)";
+
+    }
+  );
+
+
+  /*
+    Save the card immediately.
+    This means the selected card
+    becomes today's daily card.
+  */
+
+  saveDailyCard(index);
+
+
+  /*
+    Wait for the fan to disappear
+    before showing the selected card.
+  */
+
+  setTimeout(
+    () => {
+
+      if (fanContainer) {
+
+        fanContainer.style.display =
+          "none";
+
+      }
+
+
+      if (selectedStage) {
+
+        selectedStage.style.display =
+          "flex";
+
+      }
+
+
+      displayCard(
+        index,
+        true
+      );
+
+    },
+    450
+  );
+
+}
+  
+/* ============================================================
    PULL DAILY CARD
 ============================================================ */
 
