@@ -2422,26 +2422,16 @@ function selectFanCard(index) {
 
 function pullDailyCard() {
 
-  const button =
-    document.getElementById("pullCardButton");
-
-  const status =
-    document.getElementById("cardStatus");
+  const saved =
+    getSavedCard();
 
   const today =
     getTodayKey();
 
-  const saved =
-    getSavedCard();
-
 
   /*
-    IMPORTANT:
-    Check again every time the button is pressed.
-
-    This means that if someone leaves the page open
-    overnight, they can still receive a new card
-    after midnight.
+    If today's card already exists,
+    simply display it.
   */
 
   if (
@@ -2456,53 +2446,20 @@ function pullDailyCard() {
     );
 
     return;
+
   }
 
 
   /*
-    Pick a random card.
-
-    Avoid yesterday's card when possible.
+    The fan itself is now the
+    card-selection mechanism.
   */
 
-  let randomIndex;
-
-  if (
-    saved &&
-    empowermentCards.length > 1
-  ) {
-
-    do {
-
-      randomIndex =
-        Math.floor(
-          Math.random() * empowermentCards.length
-        );
-
-    } while (
-      randomIndex === saved.index
-    );
-
-  } else {
-
-    randomIndex =
-      Math.floor(
-        Math.random() * empowermentCards.length
-      );
-
-  }
-
-
-  saveDailyCard(randomIndex);
-
-  displayCard(
-    randomIndex,
-    true
-  );
+  createFan();
 
 }
 
-
+  
 /* ============================================================
    DISPLAY CARD
 ============================================================ */
