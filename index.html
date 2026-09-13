@@ -2098,32 +2098,61 @@ function saveDailyCard(index) {
 
 function initialiseDailyCard() {
 
-  const saved = getSavedCard();
+  const saved =
+    getSavedCard();
 
-  if (!saved) {
-    return;
-  }
-
-
-  const today = getTodayKey();
+  const today =
+    getTodayKey();
 
 
   /*
-    If the saved card belongs to today,
-    show it immediately.
+    If today's card already exists,
+    show that card immediately.
   */
 
   if (
+    saved &&
     saved.date === today &&
     empowermentCards[saved.index]
   ) {
+
+    const fanContainer =
+      document.getElementById(
+        "fanContainer"
+      );
+
+    const selectedStage =
+      document.getElementById(
+        "selectedCardStage"
+      );
+
+    if (fanContainer) {
+      fanContainer.style.display =
+        "none";
+    }
+
+    if (selectedStage) {
+      selectedStage.style.display =
+        "flex";
+    }
+
 
     displayCard(
       saved.index,
       false
     );
 
+    return;
+
   }
+
+
+  /*
+    No card has been pulled today,
+    so show the fan.
+  */
+
+  createFan();
 
 }
 
