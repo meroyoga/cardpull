@@ -2609,22 +2609,59 @@ setInterval(() => {
 
 
   if (
-    saved &&
-    saved.date !== today
-  ) {
+  saved &&
+  saved.date !== today
+) {
 
-    button.disabled = false;
+  button.disabled = false;
 
-    button.textContent =
-      "Pull my new daily card";
+  button.textContent =
+    "Pull my new daily card";
 
-    document
-      .getElementById("cardStatus")
-      .textContent =
-      "A new day has started. Your next card is waiting.";
 
+  /*
+    Reset the selected card so that
+    the next pull starts with the fan.
+  */
+
+  const cardElement =
+    document.getElementById(
+      "empowermentCard"
+    );
+
+  if (cardElement) {
+    cardElement.classList.remove(
+      "flipped"
+    );
   }
 
+
+  const selectedStage =
+    document.getElementById(
+      "selectedCardStage"
+    );
+
+  if (selectedStage) {
+    selectedStage.style.display =
+      "none";
+  }
+
+
+  /*
+    The fan order will automatically
+    be regenerated because today's
+    date is different.
+  */
+
+  createFan();
+
+
+  document
+    .getElementById("cardStatus")
+    .textContent =
+    "A new day has started. Your next card is waiting.";
+
+}
 }, 60000);
 
 
