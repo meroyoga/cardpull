@@ -2127,6 +2127,168 @@ function initialiseDailyCard() {
 
 }
 
+/* ============================================================
+   CREATE CARD FAN
+============================================================ */
+
+function createFan() {
+
+  const container =
+    document.getElementById(
+      "fanContainer"
+    );
+
+  const selectedStage =
+    document.getElementById(
+      "selectedCardStage"
+    );
+
+  if (!container) {
+    return;
+  }
+
+
+  /*
+    Make sure the fan is visible
+    and the selected card is hidden.
+  */
+
+  container.style.display = "flex";
+
+  if (selectedStage) {
+    selectedStage.style.display = "none";
+  }
+
+
+  container.innerHTML = "";
+
+
+  const order =
+    getFanOrder();
+
+  const total =
+    order.length;
+
+  const centre =
+    (total - 1) / 2;
+
+
+  order.forEach(
+    (cardIndex, position) => {
+
+      const fanCard =
+        document.createElement("div");
+
+      fanCard.className =
+        "fan-card";
+
+
+      /*
+        The original Shine reference uses
+        a 45deg → centre → -45deg fan
+        with transform-origin at 50% 350%.
+
+        We use a slightly softer 70deg
+        total spread here so the 33 cards
+        remain usable on a modern screen.
+      */
+
+      const rotation =
+        total === 1
+          ? 0
+          : 35 -
+            (position / (total - 1)) * 70;
+
+
+      fanCard.style.setProperty(
+        "--rotation",
+        `${rotation}deg`
+      );
+
+
+      /*
+        Keep the centre cards slightly
+        lower so the fan has a soft curve.
+      */
+
+      const distanceFromCentre =
+        Math.abs(
+          position - centre
+        );
+
+      const downward =
+        distanceFromCentre < 2
+          ? 10
+          : 0;
+
+
+      fanCard.style.transform =
+        `translateX(-50%) rotate(${rotation}deg) translateY(${downward}px)`;
+
+
+      /*
+        Centre cards sit above the
+        surrounding cards.
+      */
+
+      fanCard.style.zIndex =
+        1000 -
+        Math.round(
+          distanceFromCentre
+        );
+
+
+      /*
+        Each fan card uses the card back.
+      */
+
+      const inner =
+        document.createElement("div");
+
+      inner.className =
+        "fan-card-inner";
+
+
+      const image =
+        document.createElement("img");
+
+      image.src =
+        "https://hkdgqdmxhtnxtcuqfovq.supabase.co/storage/v1/object/public/Other/other/LM_card/CARD-BACKSIDE.png";
+
+      image.alt =
+        "Empowerment card";
+
+
+      inner.appendChild(image);
+
+      fanCard.appendChild(inner);
+
+
+      /*
+        Tapping a card selects that
+        specific card.
+      */
+
+      fanCard.addEventListener(
+        "click",
+        () => {
+
+          selectFanCard(
+            cardIndex
+          );
+
+        }
+      );
+
+
+      container.appendChild(
+        fanCard
+      );
+
+    }
+  );
+
+}
 
 /* ============================================================
    PULL DAILY CARD
