@@ -1863,8 +1863,151 @@ const empowermentCards = [
 ============================================================ */
 
 const STORAGE_KEY = "daily_empowerment_card_v1";
+const FAN_ORDER_KEY = "daily_empowerment_fan_order_v1";
+const FAN_ORDER_DATE_KEY = "daily_empowerment_fan_order_date_v1";
+/* ============================================================
+   DAILY FAN ORDER
+============================================================ */
+
+function shuffleArray(array) {
+
+  const shuffled = [...array];
+
+  for (
+    let i = shuffled.length - 1;
+    i > 0;
+    i--
+  ) {
+
+    const j =
+      Math.floor(
+        Math.random() * (i + 1)
+      );
+
+    [
+      shuffled[i],
+      shuffled[j]
+    ] = [
+      shuffled[j],
+      shuffled[i]
+    ];
+
+  }
+
+  return shuffled;
+}
 
 
+function getFanOrder() {
+
+  const today =
+    getTodayKey();
+
+  const savedDate =
+    localStorage.getItem(
+      FAN_ORDER_DATE_KEY
+    );
+
+  const savedOrder =
+    localStorage.getItem(
+      FAN_ORDER_KEY
+    );
+
+
+  /*
+    If today's fan order already exists,
+    use it again.
+
+    This means refreshing the page
+    does NOT reshuffle the cards.
+  */
+
+  if (
+    savedDate === today &&
+    savedOrder
+  ) {
+
+    try {
+
+      const parsed =
+        JSON.parse(savedOrder);
+
+      if (
+        Array.isArray(parsed) &&
+        parsed.length === empowermentCards.length
+      ) {
+
+        return parsed;
+
+      }
+
+    } catch (error) {}
+
+  }
+
+
+  /*
+    Create a new random order.
+  */
+
+  let order =
+    shuffleArray(
+      empowermentCards.map(
+        (_, index) => index
+      )
+    );
+
+
+  /*
+    Make sure the new day's order
+    is not exactly the same as
+    the previous day's order.
+  */
+
+  if (savedOrder) {
+
+    try {
+
+      const previousOrder =
+        JSON.parse(savedOrder);
+
+      const identical =
+        previousOrder.length === order.length &&
+        order.every(
+          (value, index) =>
+            value === previousOrder[index]
+        );
+
+      if (identical) {
+
+        order =
+          shuffleArray(
+            empowermentCards.map(
+              (_, index) => index
+            )
+          );
+
+      }
+
+    } catch (error) {}
+
+  }
+
+
+  localStorage.setItem(
+    FAN_ORDER_KEY,
+    JSON.stringify(order)
+  );
+
+  localStorage.setItem(
+    FAN_ORDER_DATE_KEY,
+    today
+  );
+
+
+  return order;
+
+}
 /* ============================================================
    PAGE NAVIGATION
 ============================================================ */
