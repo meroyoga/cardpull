@@ -2221,11 +2221,24 @@ function createFan() {
         remain usable on a modern screen.
       */
 
-      const rotation =
-        total === 1
-          ? 0
-          : 35 -
-            (position / (total - 1)) * 70;
+const isMobile = window.innerWidth <= 760;
+const isSmallMobile = window.innerWidth <= 450;
+
+let fanAngle;
+
+if (isSmallMobile) {
+  fanAngle = 18;
+} else if (isMobile) {
+  fanAngle = 24;
+} else {
+  fanAngle = 35;
+}
+
+const rotation =
+  total === 1
+    ? 0
+    : fanAngle -
+      (position / (total - 1)) * (fanAngle * 2);
 
 
       fanCard.style.setProperty(
