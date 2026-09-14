@@ -2259,7 +2259,6 @@ const horizontalOffset =
 const rotation =
   startAngle +
   progress * (endAngle - startAngle);
-
       fanCard.style.setProperty(
         "--rotation",
         `${rotation}deg`
@@ -2283,7 +2282,9 @@ const rotation =
 
 
       fanCard.style.transform =
-        `translateX(-50%) rotate(${rotation}deg) translateY(${downward}px)`;
+  `translateX(calc(-50% + ${horizontalOffset}px))
+   rotate(${rotation}deg)
+   translateY(${downward}px)`;
 
 
       /*
