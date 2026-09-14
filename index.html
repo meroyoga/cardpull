@@ -2230,22 +2230,35 @@ function createFan() {
 const isMobile = window.innerWidth <= 760;
 const isSmallMobile = window.innerWidth <= 450;
 
-let fanAngle;
+let spread;
+let startAngle;
+let endAngle;
 
 if (isSmallMobile) {
-  fanAngle = 18;
+  spread = 115;
+  startAngle = 18;
+  endAngle = -18;
 } else if (isMobile) {
-  fanAngle = 24;
+  spread = 145;
+  startAngle = 24;
+  endAngle = -24;
 } else {
-  fanAngle = 35;
+  spread = 300;
+  startAngle = 35;
+  endAngle = -35;
 }
 
-const rotation =
+const progress =
   total === 1
-    ? 0
-    : fanAngle -
-      (position / (total - 1)) * (fanAngle * 2);
+    ? 0.5
+    : position / (total - 1);
 
+const horizontalOffset =
+  (progress - 0.5) * spread;
+
+const rotation =
+  startAngle +
+  progress * (endAngle - startAngle);
 
       fanCard.style.setProperty(
         "--rotation",
