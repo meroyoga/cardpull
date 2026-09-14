@@ -2230,40 +2230,33 @@ function createFan() {
 const isMobile = window.innerWidth <= 760;
 const isSmallMobile = window.innerWidth <= 450;
 
-let spread;
 let startAngle;
 let endAngle;
 
 if (isSmallMobile) {
-  spread = 115;
-  startAngle = 18;
-  endAngle = -18;
-} else if (isMobile) {
-  spread = 145;
   startAngle = 24;
-  endAngle = -24;
+  endAngle = 6;
+} else if (isMobile) {
+  startAngle = 30;
+  endAngle = 5;
 } else {
-  spread = 300;
-  startAngle = 35;
-  endAngle = -35;
+  startAngle = 42;
+  endAngle = 5;
 }
 
 const progress =
   total === 1
-    ? 0.5
+    ? 0
     : position / (total - 1);
-
-const horizontalOffset =
-  (progress - 0.5) * spread;
 
 const rotation =
   startAngle +
   progress * (endAngle - startAngle);
-      fanCard.style.setProperty(
-        "--rotation",
-        `${rotation}deg`
-      );
 
+fanCard.style.setProperty(
+  "--rotation",
+  `${rotation}deg`
+);
 
       /*
         Keep the centre cards slightly
@@ -2278,8 +2271,8 @@ const rotation =
     const downward = 0;
 
 
-      fanCard.style.transform =
-  `translateX(calc(-50% + ${horizontalOffset}px))
+     fanCard.style.transform =
+  `translateX(-50%)
    rotate(${rotation}deg)
    translateY(${downward}px)`;
 
