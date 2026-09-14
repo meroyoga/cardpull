@@ -420,18 +420,16 @@ img {
 
 /* Small downward movement when hovering */
 
-  @media (hover: hover) {
-
+ @media (hover: hover) {
   .fan-card:hover {
     transform:
-      translateX(-50%)
-      rotate(var(--rotation))
-      translateY(18px);
+      translateX(calc(-50% + var(--x)))
+      translateY(calc(var(--y) + 18px))
+      rotate(var(--rotation));
 
     filter:
       drop-shadow(0 18px 30px rgba(64,82,92,0.22));
   }
-
 }
 
 
