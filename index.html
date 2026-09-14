@@ -2270,10 +2270,15 @@ const x =
 const y =
   (1 - Math.cos(radians)) * radius;
 
-/*
-  The cards follow the curve while also
-  rotating gradually from left to right.
-*/
+fanCard.style.setProperty(
+  "--x",
+  `${x}px`
+);
+
+fanCard.style.setProperty(
+  "--y",
+  `${y}px`
+);
 
 const rotation =
   angle;
