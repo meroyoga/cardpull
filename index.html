@@ -2232,61 +2232,66 @@ const isSmallMobile = window.innerWidth <= 450;
 
 let startAngle;
 let endAngle;
+let radius;
 
 if (isSmallMobile) {
-  startAngle = 24;
-  endAngle = 6;
+  startAngle = -38;
+  endAngle = 38;
+  radius = 470;
 } else if (isMobile) {
-  startAngle = 30;
-  endAngle = 5;
+  startAngle = -42;
+  endAngle = 42;
+  radius = 540;
 } else {
-  startAngle = 42;
-  endAngle = 5;
+  startAngle = -46;
+  endAngle = 46;
+  radius = 620;
 }
 
 const progress =
   total === 1
-    ? 0
+    ? 0.5
     : position / (total - 1);
 
-const rotation =
+const angle =
   startAngle +
   progress * (endAngle - startAngle);
+
+const radians =
+  angle * Math.PI / 180;
+
+/*
+  Place every card along one continuous
+  circular arc rather than rotating all
+  cards around the same central point.
+*/
+
+const x =
+  Math.sin(radians) * radius;
+
+const y =
+  (1 - Math.cos(radians)) * radius;
+
+/*
+  The cards follow the curve while also
+  rotating gradually from left to right.
+*/
+
+const rotation =
+  angle;
 
 fanCard.style.setProperty(
   "--rotation",
   `${rotation}deg`
 );
 
-      /*
-        Keep the centre cards slightly
-        lower so the fan has a soft curve.
-      */
+fanCard.style.transform =
+  `translateX(calc(-50% + ${x}px))
+   translateY(${y}px)
+   rotate(${rotation}deg)`;
 
-      const distanceFromCentre =
-        Math.abs(
-          position - centre
-        );
-
-    const downward = 0;
-
-
-     fanCard.style.transform =
-  `translateX(-50%)
-   rotate(${rotation}deg)
-   translateY(${downward}px)`;
-
-
-      /*
-        Centre cards sit above the
-        surrounding cards.
-      */
-
-      fanCard.style.zIndex =
-        1000 -
-        Math.round(
-          distanceFromCentre
-        );
+fanCard.style.zIndex =
+  1000 - position;
 
 
       /*
