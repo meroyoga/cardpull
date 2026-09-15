@@ -2219,17 +2219,38 @@ function createFan() {
 
 
   const order =
-    getFanOrder();
+  getFanOrder();
 
-  const total =
-    order.length;
+/*
+  Desktop shows all 33 cards.
 
-  const centre =
-    (total - 1) / 2;
+  Smaller screens show only 16 cards,
+  chosen from the already-randomized
+  daily order.
+*/
 
+const isMobile =
+  window.innerWidth <= 760;
 
-  order.forEach(
-    (cardIndex, position) => {
+const visibleCount =
+  isMobile
+    ? 16
+    : order.length;
+
+const visibleOrder =
+  order.slice(
+    0,
+    visibleCount
+  );
+
+const total =
+  visibleOrder.length;
+
+const centre =
+  (total - 1) / 2;
+
+visibleOrder.forEach(
+  (cardIndex, position) => {
 
       const fanCard =
         document.createElement("div");
