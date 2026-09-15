@@ -417,6 +417,19 @@ img {
   pointer-events: none;
 }
 
+  .fan-card-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(45,58,65,0.38);
+
+  opacity: 0;
+
+  transition: opacity 250ms ease;
+
+  pointer-events: none;
+}
 
 /* Small downward movement when hovering */
 
